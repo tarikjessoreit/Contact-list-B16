@@ -1,0 +1,15 @@
+/* login page */
+
+#login{}
+#login .logo{
+    width: 150px;
+    margin: 20px auto;
+}
+#login .logo img{
+    width: 100%;
+}
+
+/* Header */
+.header .header-right button{
+    min-width: 150px !important;
+}
