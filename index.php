@@ -1,3 +1,5 @@
+<?php require('config.php') ?>
+<?php require('functions.php') ?>
 <!doctype html>
 <html lang="en">
   <head>

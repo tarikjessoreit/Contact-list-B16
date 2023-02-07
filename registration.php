@@ -1,3 +1,31 @@
+<?php require('config.php') ?>
+<?php require('functions.php') ?>
+<?php
+
+    if(isset($_POST['regbtn'])){
+        $entry_datetime = date('Y-m-d H:i:s');
+        $username = $_POST['username'];
+        $email = $_POST['uemail'];
+        $password = $_POST['userpass'];
+        $confPass = $_POST['userconfpass'];
+        $status = "active";
+    if ($password===$confPass) {
+        $sql = "INSERT INTO cl_users(user_reg_datetime, user_username, user_email, user_password, user_status) VALUES ('$entry_datetime','$username','$email','$password','$status')";
+        if($conn->query($sql)===true){
+            $msg = "Registration Successfull";
+        }else{
+            $err = "Registration Faild: " . $conn->error;
+        }
+    }else{
+        $err = "Password Not Match. Please Try Again";
+    }
+
+
+    
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,11 +42,25 @@
             <div class="logo">
                 <img src="assets/imgs/logo.png" alt="">
             </div>
-            <form>
-                <!-- Email input -->
+            <?php if(isset($msg)){ ?>
+            <div class="alert alert-success"><?php echo $msg; ?></div>
+            <?php } ?>
+
+            <?php if(isset($err)){ ?>
+            <div class="alert alert-danger"><?php echo $err; ?></div>
+            <?php } ?>
+
+            <form method="post" action="">
+                <!-- username input -->
                 <div class="form-outline mb-4">
                     <input type="text" name="username" id="username" class="form-control" />
                     <label class="form-label" for="username">Username</label>
+                </div>
+                
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="email" name="uemail" id="uemail" class="form-control" />
+                    <label class="form-label" for="uemail">Email</label>
                 </div>
 
                 <!-- Password input -->
@@ -27,7 +69,7 @@
                     <label class="form-label" for="userpass">Password</label>
                 </div>
 
-                <!-- Password input -->
+                <!-- confirm Password input -->
                 <div class="form-outline mb-4">
                     <input type="password" name="userconfpass" id="userconfpass" class="form-control" />
                     <label class="form-label" for="userconfpass">Confirm Password</label>
@@ -45,7 +87,7 @@
                 </div>
 
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up</button>
+                <button type="submit" name="regbtn" class="btn btn-primary btn-block mb-4">Sign Up</button>
 
                 <!-- Register buttons -->
                 <div class="text-center">
