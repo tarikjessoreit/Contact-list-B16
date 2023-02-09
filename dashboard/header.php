@@ -1,5 +1,10 @@
 <?php require('../config.php') ?>
 <?php require('../functions.php') ?>
+<?php 
+if (!isset($_COOKIE['loginstatus']) && $_COOKIE['loginstatus'] != true) {
+    header('location:../');
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -37,7 +42,8 @@
                     <div class="dropdown">
                         <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                           <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" width="30"> Mr Jon
+                           <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" width="30">
+                           <?php echo $_COOKIE['username'];?>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
