@@ -9,14 +9,18 @@ if (isset($_COOKIE['loginstatus']) && $_COOKIE['loginstatus'] == true) {
 // login code
 if (isset($_POST['loginbtn'])) {
     $username = $_POST['username'];
-    $password = $_POST['userpass'];
-    $sql = "SELECT * FROM cl_users WHERE user_username = '$username' AND user_password = '$password'";
+    $password = md5($_POST['userpass']);
+    $sql = "SELECT * FROM $TBL_USER WHERE user_username = '$username' AND user_password = '$password'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $msg = "Login Successfull";
         $row = $result->fetch_assoc();
+
+        $uid = $row['ID'];
         $un = $row['user_username'];
+        
+        setcookie('userID', $uid, time() + 86400 * 7, '/');
         setcookie('username', $un, time() + 86400 * 7, '/');
         setcookie('loginstatus', true, time() + 86400 * 7, '/');
         header('location:dashboard');

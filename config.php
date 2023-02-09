@@ -18,4 +18,13 @@ if ($conn->connect_error) {
 //     echo "Error: " . $conn->error;
 // }
 
+// define('TBL_USER', 'cl_users');
+// define('TBL_CONTACT', 'cl_contacts');
+
+$TBL_USER = "cl_users";
+$TBL_CONTACT = "cl_contacts";
+
+
+
+
 ?>

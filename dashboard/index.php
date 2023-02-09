@@ -24,42 +24,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>01</td>
-                        <td>Mr Jon Abr.</td>
-                        <td>017777777</td>
-                        <td>email@yahoo.com</td>
-                        <td>USA</td>
-                        <td>
-                            <a href="edit-data.php" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>01</td>
-                        <td>Mr Jon Abr.</td>
-                        <td>017777777</td>
-                        <td>email@yahoo.com</td>
-                        <td>USA</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>01</td>
-                        <td>Mr Jon Abr.</td>
-                        <td>017777777</td>
-                        <td>email@yahoo.com</td>
-                        <td>USA</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
-                        </td>
-                    </tr>
-                    
+
+                    <?php
+                    $user_ID = $_COOKIE['userID'];
+                    $result = $conn->query("SELECT * FROM $TBL_CONTACT WHERE user_ID = $user_ID");
+                    while ($row = $result->fetch_assoc()) { ?>
+
+                        <tr>
+                            <td><?php echo $row['ID']?></td>
+                            <td><?php echo $row['cont_name']?></td>
+                            <td><?php echo $row['cont_phone_no']?></td>
+                            <td><?php echo $row['cont_email']?></td>
+                            <td><?php echo $row['cont_address']?></td>
+                            <td>
+                                <a href="edit-data.php?eid=<?php echo $row['ID']?>" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                <a href="delete.php?delteid=<?php echo $row['ID']?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+
+                    <?php } ?>
+
                 </tbody>
                 <tfoot>
                     <tr>
